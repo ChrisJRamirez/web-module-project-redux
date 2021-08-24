@@ -1,10 +1,15 @@
 import React from 'react';
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
+import {addMovie} from "../actions/movieActions"
 
 const MovieHeader = (props) => {
     // const appTitle = "";
     const displayFavorites = true;
+
+    const handleChanges = e => {
+        props.setState({...props.state})
+    }
     
     return(<div className="table-title">
         <div className="row">
@@ -26,4 +31,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(MovieHeader);
+export default connect(mapStateToProps, {addMovie})(MovieHeader);
