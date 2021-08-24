@@ -6,7 +6,7 @@ export const deleteMovie = (id)=>{
 }
 
 
-export const addMovie = (title, director, genre, metascore, description) => {
-    return ({type: ADD_MOVIE, payload: title, director, genre, metascore, description});
+export const addMovie = (newMovie) => {
+    return ({type: ADD_MOVIE, payload: newMovie});
 }
 

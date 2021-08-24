@@ -10,11 +10,10 @@ const Movie = (props) => {
 
     // const movies = [];
 
-    const handleChanges = e => {
-         props.setState({...props.state, id: null })
-        }
-    const handleClick = () => {
-        deleteMovie(push("/movie"))
+    
+    const handleDelete = () => {
+        props.deleteMovie(movie.id);
+        push("/movies");
     }
 
     const movie = props.movies.find(movie => movie.id === Number(id));
@@ -50,7 +49,7 @@ const Movie = (props) => {
                         <section>
                             <span className="m-2 btn btn-dark">Favorite</span>
                             <span className="delete"><input type="button" 
-                             onChange={handleChanges} onClick= {handleClick} 
+                            onClick= {handleDelete} 
                             className="m-2 btn btn-danger" value="Delete" /></span>
                         </section>
                     </div>
