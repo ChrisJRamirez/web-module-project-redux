@@ -1,4 +1,5 @@
 # Redux React Module Project: Movie CRUD
+just setting up the project
 
 This module explored the redux philosophy, creation of the redux store and using connect to link state and action to arbitrary components.
 
