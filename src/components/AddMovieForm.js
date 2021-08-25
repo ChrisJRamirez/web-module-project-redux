@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addMovie } from './../actions/movieActions';
 import { connect } from 'react-redux';
+// import {v4 as uuidv4} from "uuid";
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -12,7 +13,8 @@ const AddMovieForm = (props) => {
         director: "",
         genre: "",
         metascore: 0,
-        description:""
+        description: "",
+        // id: uuidv4(),
     });
 
     const handleChange = (e) => {
@@ -29,40 +31,40 @@ const AddMovieForm = (props) => {
     }
 
     const { title, director, genre, metascore, description } = movie;
-    return(<div className="col">
+    return (<div className="col">
         <div className="modal-dialog">
             <div className="modal-content">
                 <form onSubmit={handleSubmit}>
-                    <div className="modal-header">						
+                    <div className="modal-header">
                         <h4 className="modal-title">Add Movie</h4>
                     </div>
 
-                    <div className="modal-body">					
+                    <div className="modal-body">
                         <div className="form-group">
                             <label>Title</label>
-                            <input value={title} onChange={handleChange} name="title" type="text" className="form-control"/>
+                            <input value={title} onChange={handleChange} name="title" type="text" className="form-control" />
                         </div>
                         <div className="form-group">
                             <label>Director</label>
-                            <input value={director} onChange={handleChange} name="director" type="text" className="form-control"/>
+                            <input value={director} onChange={handleChange} name="director" type="text" className="form-control" />
                         </div>
                         <div className="form-group">
                             <label>Genre</label>
-                            <input value={genre} onChange={handleChange} name="genre" type="text" className="form-control"/>
+                            <input value={genre} onChange={handleChange} name="genre" type="text" className="form-control" />
                         </div>
                         <div className="form-group">
                             <label>Metascore</label>
-                            <input value={metascore} onChange={handleChange} name="metascore" type="number" className="form-control"/>
-                        </div>		
+                            <input value={metascore} onChange={handleChange} name="metascore" type="number" className="form-control" />
+                        </div>
                         <div className="form-group">
                             <label>Description</label>
                             <textarea value={description} onChange={handleChange} name="description" className="form-control"></textarea>
                         </div>
-                        			
+
                     </div>
                     <div className="modal-footer">
-                        <input type="submit" className="btn btn-success" value="Add"/>
-                        <Link to={`/movies`}><input type="button" className="btn btn-default" value="Cancel"/></Link>
+                        <input type="submit" className="btn btn-success" value="Add" />
+                        <Link to={`/movies`}><input type="button" className="btn btn-default" value="Cancel" /></Link>
                     </div>
                 </form>
             </div>
@@ -71,9 +73,13 @@ const AddMovieForm = (props) => {
 }
 
 const mapStateToProps = state => {
-    return {
-        movie: state.movies
-    }
+    return {}
 }
 
-export default connect(mapStateToProps,{addMovie})(AddMovieForm);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addMovie: (newMovie) => dispatch(addMovie(newMovie))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMovieForm);
