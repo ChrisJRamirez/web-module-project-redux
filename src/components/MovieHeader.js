@@ -6,8 +6,8 @@ import { toggleFavorites } from "../actions/favoriteActions"
 
 
 const MovieHeader = (props) => {
-    const appTitle = "";
-    const displayFavorites = true;
+    // const appTitle = "";
+    // const displayFavorites = true;
 
     return (<div className="table-title">
         <div className="row">
@@ -16,8 +16,8 @@ const MovieHeader = (props) => {
             </div>
             <div className="col-sm-6 headerBar">
                 <div className="btn btn-sm btn-primary">
-                    <span onClick={toggleFavorites}>
-                        {displayFavorites ? "Hide" : "Show"} Favorites
+                    <span onClick={props.toggleFavorites}>
+                        {props.displayFavorites ? "Hide" : "Show"} Favorites
                 </span>
                 </div>
                 <Link to="/movies" className="btn btn-sm btn-primary">View All Movies</Link>
@@ -28,19 +28,18 @@ const MovieHeader = (props) => {
 }
 
 const mapStateToProps = state => {
-  
     return {
-        appTitle: state.appTitle,
-
+        appTitle: state.movieReducer.appTitle,
+        displayFavorites: state.favoritesReducer.displayFavorites
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         toggleFavorites: () => {
-//             dispatch(toggleFavorites())
-//         }
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toggleFavorites: () => {
+            dispatch(toggleFavorites())
+        }
+    }
+}
 
-export default connect(mapStateToProps)(MovieHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieHeader);

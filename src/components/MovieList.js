@@ -7,6 +7,7 @@ import MovieFooter from './MovieFooter';
 
 
 const MovieList = (props)=> {
+    console.log(props)
     const movies = [];
 
     return (
@@ -38,7 +39,7 @@ const MovieList = (props)=> {
 const mapStateToProps = state => {
     console.log(state)
     return {
-        movies: state.movies
+        movies: state.movieReducer.movies
     }
 };
 
