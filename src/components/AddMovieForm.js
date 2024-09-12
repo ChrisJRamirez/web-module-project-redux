@@ -23,6 +23,9 @@ const AddMovieForm = (props) => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+        props.addMovie(movie);
+        push("/movies")
     }
 
     const { title, director, genre, metascore, description } = movie;
@@ -67,4 +70,16 @@ const AddMovieForm = (props) => {
     </div>);
 }
 
-export default AddMovieForm;
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        addMovie: (newMovie) => dispatch(addMovie(newMovie))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMovieForm);

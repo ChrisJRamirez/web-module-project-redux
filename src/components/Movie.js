@@ -1,12 +1,21 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import {connect} from "react-redux";
+
+import {deleteMovie} from "../actions/movieActions";
+import {addFavorites} from "../actions/favoriteActions"
 
 const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
 
-    const movies = [];
-    const movie = movies.find(movie=>movie.id===Number(id));
+    const movies = props.movies;
+    const movie = props.movies.find(movie=>movie.id===Number(id));
+
+    const handleDelete = () => {
+        props.deleteMovie(movie.id);
+        push("/movies");
+    }
     
     return(<div className="modal-page col">
         <div className="modal-dialog">
@@ -37,8 +46,13 @@ const Movie = (props) => {
                         </section>
                         
                         <section>
-                            <span className="m-2 btn btn-dark">Favorite</span>
-                            <span className="delete"><input type="button" className="m-2 btn btn-danger" value="Delete"/></span>
+                            <span className="m-2 btn btn-dark" 
+                            onClick={() => props.addFavorites(movie)}>Favorite</span>
+
+                            <span className="delete"><input type="button" 
+                            className="m-2 btn btn-danger" 
+                            onClick={handleDelete} 
+                            value="Delete" /></span>
                         </section>
                     </div>
                 </div>
@@ -47,4 +61,22 @@ const Movie = (props) => {
     </div>);
 }
 
-export default Movie;
+const mapStateToProps = (state) => {
+    return {
+        movies: state.movieReducer.movies,
+        // displayFavorites: state.favoritesReducer.displayFavorites
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteMovie: (id) => {
+            dispatch(deleteMovie(id))
+        },
+        addFavorites: (newFavorite) => {
+            dispatch(addFavorites(newFavorite))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Movie);
